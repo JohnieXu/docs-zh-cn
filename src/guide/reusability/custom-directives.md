@@ -55,7 +55,7 @@ export default {
 </div>
 
 <div class="demo">
-  <input v-focus placeholder="此处会被聚焦" />
+  <input v-focus placeholder="This should be focused" />
 </div>
 
 假设你还未点击页面中的其他地方，那么上面这个 input 元素则会被自动聚焦。该指令比 `autofocus` attribute 更有用，因为它不仅仅可以在页面加载完成后运行，还可以在 Vue 动态插入元素后运行。
@@ -108,8 +108,8 @@ app.directive('focus', {
 一个指令的定义对象可以提供几种钩子函数 (都是可选的)：
 
 ```js
-const myDir = {
-  // 在帮顶元素的 attribute 前调用
+const myDirective = {
+  // 在绑定元素的 attribute 前调用
   // 或事件监听器应用前调用
   created(el, binding, vnode, prevVnode) {
     // 下面会介绍各个参数的细节

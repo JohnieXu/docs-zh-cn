@@ -198,7 +198,7 @@ export function useFetch(url) {
     // 在请求之前重设状态...
     data.value = null
     error.value = null
-    // unref() 解套可能为 ref 的值
+    // unref() 解包可能为 ref 的值
     fetch(unref(url))
       .then((res) => res.json())
       .then((json) => (data.value = json))
@@ -242,7 +242,7 @@ function useFeature(maybeRef) {
 }
 ```
 
-如果你的可组合函数在接收 ref 为参数时会产生相应式 effect，请确保使用 `watch()` 显式地监听此 ref，或者在 `watchEffect()` 中调用 `unref()` 来进行正确的追踪。
+如果你的可组合函数在接收 ref 为参数时会产生响应式 effect，请确保使用 `watch()` 显式地监听此 ref，或者在 `watchEffect()` 中调用 `unref()` 来进行正确的追踪。
 
 ### 返回值 {#return-values}
 
@@ -255,7 +255,7 @@ const { x, y } = useMouse()
 
 从可组合函数返回一个响应式对象会导致在对象解构过程中丢失与可组合函数内状态的响应性连接。与之相反，ref 则可以维持这一响应性连接。
 
-如果你更希望以对象 property 的形式从可组合函数中返回状态，你可以将要返回的对象用 `reactive()` 包裹，这样其中的 ref 会被自动解套，例如：
+如果你更希望以对象 property 的形式从可组合函数中返回状态，你可以将要返回的对象用 `reactive()` 包装，这样其中的 ref 会被自动解包，例如：
 
 ```js
 const mouse = reactive(useMouse())
@@ -333,7 +333,7 @@ export default {
 
 ### 相比于 Mixin {#vs-mixins}
 
-Vue 2 的用户可能会对 [mixin](/api/options-composition.html#mixins) 选项比较熟悉。它也让我们能够把组件逻辑提取到可复用的单元里。然而 mixin 有三个主要的短板：
+Vue 2 的用户可能会对 [mixins](/api/options-composition.html#mixins) 选项比较熟悉。它也让我们能够把组件逻辑提取到可复用的单元里。然而 mixins 有三个主要的短板：
 
 1. **不清晰的 property 来源**：当使用了多个 mixin 时，实例 property 来自哪个 mixin 变得不清晰，这使追溯实现和理解组件行为变得困难。这也是我们推荐在可组合函数中使用 ref + 解构模式的理由：让 property 的来源在消费组件时一目了然。
 

@@ -1,14 +1,22 @@
 # 事件处理 {#event-handling}
 
+<div class="options-api">
+  <VueSchoolLink href="https://vueschool.io/lessons/user-events-in-vue-3" title="事件 - 免费 Vue.js 课程"/>
+</div>
+
+<div class="composition-api">
+  <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-user-events-in-vue-3" title="事件 - 免费 Vue.js 课程"/>
+</div>
+
 ## 监听事件 {#listening-to-events}
 
 你可以使用 `v-on` 指令 (简写为 `@`) 来监听 DOM 事件和运行 JavaScript 代码。用法：`v-on:click="methodName"` 或 `@click="handler"`。
 
 事件处理器的值可以是：
 
-1. **内联事件处理器：**事件被触发时执行的内联 JavaScript 语句 (与 `onclick` 类似) 。
+1. **内联事件处理器：** 事件被触发时执行的内联 JavaScript 语句 (与 `onclick` 类似) 。
 
-2. **方法事件处理器：**一个组件的属性名、或对某个方法的访问。
+2. **方法事件处理器：** 一个组件的属性名、或对某个方法的访问。
 
 ## 内联事件处理器 {#inline-handlers}
 
@@ -112,12 +120,12 @@ methods: {
 
 <div class="composition-api">
 
-你也可以看看[为事件处理器标注类型](/guide/typescript/composition-api.html#typing-event-handlers)这一章了解更多。<sup class="vt-badge ts">TS</sup>
+你也可以看看[为事件处理器标注类型](/guide/typescript/composition-api.html#typing-event-handlers)这一章了解更多。<sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">
 
-你也可以看看[为事件处理器标注类型](/guide/typescript/options-api.html#typing-event-handlers)这一章了解更多。<sup class="vt-badge ts">TS</sup>
+你也可以看看[为事件处理器标注类型](/guide/typescript/options-api.html#typing-event-handlers)这一章了解更多。<sup class="vt-badge ts" />
 
 </div>
 

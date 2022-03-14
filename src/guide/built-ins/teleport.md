@@ -1,5 +1,7 @@
 # Teleport·传送门 {#teleport}
 
+<VueSchoolLink href="https://vueschool.io/lessons/vue-3-teleport" title="Teleport - 免费的 Vue.js 课程"/>
+
 `<Teleport>` 是一个内置组件，使我们可以将一个组件的一部分模板“传送”到该组件的 DOM 层次结构之外的 DOM 节点中。
 
 ## 基本使用 {#basic-usage}
@@ -12,7 +14,7 @@
 
 ```vue-html
 <div class="outer">
-  <h3>Vue 传送门示例</h3>
+  <h3>Tooltips with Vue 3 Teleport</h3>
   <div>
     <MyModal />
   </div>
@@ -31,11 +33,11 @@ const open = ref(false)
 </script>
 
 <template>
-  <button @click="open = true">打开模态框</button>
+  <button @click="open = true">Open Modal</button>
 
   <div v-if="open" class="modal">
-    <p>你好，这里是模态框！</p>
-    <button @click="open = false">关闭</button>
+    <p>Hello from the modal!</p>
+    <button @click="open = false">Close</button>
   </div>
 </template>
 
@@ -66,11 +68,11 @@ export default {
 </script>
 
 <template>
-  <button @click="open = true">打开模态框</button>
+  <button @click="open = true">Open Modal</button>
 
   <div v-if="open" class="modal">
-    <p>你好，这里是模态框！</p>
-    <button @click="open = false">关闭</button>
+    <p>Hello from the modal!</p>
+    <button @click="open = false">Close</button>
   </div>
 </template>
 
@@ -99,12 +101,12 @@ export default {
 `<Teleport>` 提供了一个更简洁的方式来解决此类问题，使我们无需考虑那么多层 DOM 结构的问题。让我们用 `<Teleport>` 改写一下 `<MyModal>`：
 
 ```vue-html{3,8}
-<button @click="open = true">打开模态框</button>
+<button @click="open = true">Open Modal</button>
 
 <Teleport to="body">
   <div v-if="open" class="modal">
-    <p>你好！</p>
-    <button @click="open = false">关闭</button>
+    <p>Hello from the modal!</p>
+    <button @click="open = false">Close</button>
   </div>
 </Teleport>
 ```
@@ -118,12 +120,12 @@ let open = $ref(false)
 </script>
 
 <div class="demo">
-  <button @click="open = true">打开模态框</button>
+  <button @click="open = true">Open Modal</button>
   <ClientOnly>
     <Teleport to="body">
       <div v-if="open" class="demo modal-demo">
-        <p style="margin-bottom:20px">你好！</p>
-        <button @click="open = false">关闭</button>
+        <p style="margin-bottom:20px">Hello from the modal!</p>
+        <button @click="open = false">Close</button>
       </div>
     </Teleport>
   </ClientOnly>

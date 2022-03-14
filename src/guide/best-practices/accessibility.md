@@ -15,7 +15,7 @@ Web 无障碍访问 (也称为 a11y) 是指创建可供任何人都可以使用�
 ```vue-html
 <ul class="skip-links">
   <li>
-    <a href="#main" ref="skipLink">跳到主内容</a>
+    <a href="#main" ref="skipLink">Skip to main content</a>
   </li>
 </ul>
 ```
@@ -40,7 +40,9 @@ Web 无障碍访问 (也称为 a11y) 是指创建可供任何人都可以使用�
 }
 ```
 
-一旦用户改变路由，请将焦点放回到这个跳过链接。通过用如下方式聚焦 `ref` 即可实现：
+一旦用户改变路由，请将焦点放回到这个“跳过”链接。通过如下方式聚焦“跳过”链接的模板 ref （假设使用了 `vue-router`）即可实现：
+
+<div class="options-api">
 
 ```vue
 <script>
@@ -54,7 +56,27 @@ export default {
 </script>
 ```
 
-<!-- <common-codepen-snippet title="Skip to Main" slug="GRrvQJa" :height="350" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
+</div>
+<div class="composition-api">
+
+```vue
+<script setup>
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const skipLink = ref()
+
+watch(
+  () => route.path,
+  () => {
+    skipLink.value.focus()
+  }
+)
+</script>
+```
+
+</div>
 
 [阅读关于跳过链接到主要内容的文档](https://www.w3.org/WAI/WCAG21/Techniques/general/G1.html)
 
@@ -74,17 +96,17 @@ export default {
 
 ```vue-html
 <main role="main" aria-labelledby="main-title">
-  <h1 id="main-title">主标题</h1>
+  <h1 id="main-title">Main title</h1>
   <section aria-labelledby="section-title">
-    <h2 id="section-title"> 二级标题 </h2>
-    <h3>章节小标题</h3>
+    <h2 id="section-title"> Section Title </h2>
+    <h3>Section Subtitle</h3>
     <!-- 内容 -->
   </section>
   <section aria-labelledby="section-title">
-    <h2 id="section-title"> 二级标题 </h2>
-    <h3>章节小标题</h3>
+    <h2 id="section-title"> Section Title </h2>
+    <h3>Section Subtitle</h3>
     <!-- 内容 -->
-    <h3>章节小标题</h3>
+    <h3>Section Subtitle</h3>
     <!-- 内容 -->
   </section>
 </main>
@@ -142,7 +164,7 @@ export default {
 提供标签来描述所有表单控件的用途；使 `for` 和 `id` 链接起来：
 
 ```vue-html
-<label for="name">名字</label>
+<label for="name">Name</label>
 <input type="text" name="name" id="name" v-model="name" />
 ```
 
@@ -153,11 +175,11 @@ export default {
 ![Chrome 开发者工具正在通过标签展示无障碍访问的 input 框的名字](./images/AccessibleLabelChromeDevTools.png)
 
 :::warning 警告：
-你可能还见过这样的包裹 input 框的标签：
+你可能还见过这样的包装 input 框的标签：
 
 ```vue-html
 <label>
-  名字：
+  Name：
   <input type="text" name="name" id="name" v-model="name" />
 </label>
 ```
@@ -170,7 +192,7 @@ export default {
 你也可以为 input 框配置一个带有 [`aria-label`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute) 的无障碍访问名。
 
 ```vue-html
-<label for="name">名字</label>
+<label for="name">Name</label>
 <input
   type="text"
   name="name"
@@ -256,6 +278,27 @@ export default {
 
 占位符的缺陷之一是默认情况下它们不符合[颜色对比度标准](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html)；应当修改其颜色，让它看起来像是预先填入 input 框中的数据一样。查看以下示例，可以看到满足颜色对比度条件的姓氏占位符看起来像预填充的数据：
 
+```vue-html
+<form
+  class="demo"
+  action="/dataCollectionLocation"
+  method="post"
+  autocomplete="on"
+>
+  <div v-for="item in formItems" :key="item.id" class="form-item">
+    <label :for="item.id">{{ item.label }}: </label>
+    <input
+      type="text"
+      :id="item.id"
+      :name="item.id"
+      v-model="item.value"
+      :placeholder="item.placeholder"
+    />
+  </div>
+  <button type="submit">Submit</button>
+</form>
+```
+
 <!-- <common-codepen-snippet title="Form Placeholder" slug="ExZvvMw" :height="265" tab="js,result" theme="light" :preview="false" :editable="false" /> -->
 
 最好在表单外提供所有用户需要填写输入的信息。
@@ -267,8 +310,8 @@ export default {
 
 ```vue-html
 <fieldset>
-  <legend>使用 aria-labelledby</legend>
-  <label id="date-label" for="date">当前日期：</label>
+  <legend>Using aria-labelledby</legend>
+  <label id="date-label" for="date">Current Date:</label>
   <input
     type="date"
     name="date"
@@ -283,8 +326,8 @@ export default {
 
 ```vue-html
 <fieldset>
-  <legend>使用 aria-describedby</legend>
-  <label id="dob" for="dob">生日日期：</label>
+  <legend>Using aria-describedby</legend>
+  <label id="dob" for="dob">Date of Birth:</label>
   <input type="date" name="dob" id="dob" aria-describedby="dob-instructions" />
   <p id="dob-instructions">MM/DD/YYYY</p>
 </fieldset>
@@ -300,9 +343,9 @@ export default {
 
 ```vue-html
 <form role="search">
-  <label for="search" class="hidden-visually">搜索：</label>
+  <label for="search" class="hidden-visually">Search: </label>
   <input type="text" name="search" id="search" v-model="search" />
-  <button type="submit">搜索</button>
+  <button type="submit">Search</button>
 </form>
 ```
 
@@ -331,8 +374,8 @@ export default {
 添加 `aria-hidden="true"` 在无障碍访问时被隐藏，但对其他可视用户仍然是可见的。不要在可聚焦的元素上使用它，请只在装饰性的、重复的的或屏幕外的内容上使用它。
 
 ```vue-html
-<p>这里不会在屏幕助读器上被隐藏</p>
-<p aria-hidden="true">这里会在屏幕助读器上被隐藏</p>
+<p>This is not hidden from screen readers.</p>
+<p aria-hidden="true">This is hidden from screen readers.</p>
 ```
 
 ### 按钮 {#buttons}
@@ -342,11 +385,11 @@ export default {
 
 ```vue-html
 <form action="/dataCollectionLocation" method="post" autocomplete="on">
-  <!-- Buttons -->
+  <!-- 按钮 -->
   <button type="button">Cancel</button>
   <button type="submit">Submit</button>
 
-  <!-- Input buttons -->
+  <!-- 输入按钮 -->
   <input type="button" value="Cancel" />
   <input type="submit" value="Submit" />
 </form>
@@ -364,7 +407,7 @@ export default {
 
   ```vue-html
   <form role="search">
-    <label for="search" class="hidden-visually">搜索：</label>
+    <label for="search" class="hidden-visually">Search: </label>
     <input type="text" name="search" id="search" v-model="search" />
     <input
       type="image"
@@ -379,11 +422,11 @@ export default {
 
 ```vue-html
 <form role="search">
-  <label for="searchIcon" class="hidden-visually">搜索：</label>
+  <label for="searchIcon" class="hidden-visually">Search: </label>
   <input type="text" name="searchIcon" id="searchIcon" v-model="searchIcon" />
   <button type="submit">
     <i class="fas fa-search" aria-hidden="true"></i>
-    <span class="hidden-visually">搜索</span>
+    <span class="hidden-visually">Search</span>
   </button>
 </form>
 ```
