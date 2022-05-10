@@ -12,7 +12,7 @@
 
 这里的 `<Footer>` 组件可能其实根本不关心这些 props，但它仍然需要定义并将它们传递下去使得 `<DeepChild>` 能访问到这些 props，如果组件链路非常长，可能会影响到更多这条路上的组件。这一过程被称为“prop drilling”，这似乎不太好解决。
 
-为解决这一问题，可以使用 `provide` 和 `inject`。(译者注：在本章及后续章节中，**“供给”**将成为对应 Provide 的一个专有概念) 一个父组件相对于其所有的后代组件，会作为**依赖供给者**。任何后代的组件树，无论层级有多深，都可以**注入**由父组件供给给整条链路的依赖。
+为解决这一问题，可以使用 `provide` 和 `inject`。 <sup>[[1]](#footnote-1)</sup> 一个父组件相对于其所有的后代组件，会作为**依赖提供者**。任何后代的组件树，无论层级有多深，都可以**注入**由父组件提供给整条链路的依赖。
 
 ![Provide/inject 模式](./images/provide-inject.png)
 
@@ -44,7 +44,7 @@ export default {
 }
 ```
 
-`provide()` 函数接收两个参数。第一个参数被称为**注入名**，可以是一个字符串或是一个 `Symbol`。后代组件会注入名用来查找期望注入的值。一个组件可以多次调用 `provide()`，使用不同的注入名，注入不同的依赖值。
+`provide()` 函数接收两个参数。第一个参数被称为**注入名**，可以是一个字符串或是一个 `Symbol`。后代组件会用注入名来查找期望注入的值。一个组件可以多次调用 `provide()`，使用不同的注入名，注入不同的依赖值。
 
 第二个参数是供给的值，值可以是任意类型，包括响应式的状态，比如一个 ref：
 
@@ -171,7 +171,7 @@ export default {
 
 [带有响应性的供给 + 注入完整示例](https://sfc.vuejs.org/#eyJBcHAudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBDaGlsZCBmcm9tICcuL0NoaWxkLnZ1ZSdcblxuZXhwb3J0IGRlZmF1bHQge1xuICBjb21wb25lbnRzOiB7IENoaWxkIH0sXG4gIHByb3ZpZGUoKSB7XG4gICAgcmV0dXJuIHtcbiAgICAgIG1lc3NhZ2U6ICdoZWxsbydcbiAgICB9XG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48dGVtcGxhdGU+XG4gIDxDaGlsZCAvPlxuPC90ZW1wbGF0ZT4iLCJpbXBvcnQtbWFwLmpzb24iOiJ7XG4gIFwiaW1wb3J0c1wiOiB7XG4gICAgXCJ2dWVcIjogXCJodHRwczovL3NmYy52dWVqcy5vcmcvdnVlLnJ1bnRpbWUuZXNtLWJyb3dzZXIuanNcIlxuICB9XG59IiwiQ2hpbGQudnVlIjoiPHNjcmlwdD5cbmltcG9ydCBHcmFuZENoaWxkIGZyb20gJy4vR3JhbmRDaGlsZC52dWUnXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgY29tcG9uZW50czoge1xuICAgIEdyYW5kQ2hpbGRcbiAgfVxufVxuPC9zY3JpcHQ+XG5cbjx0ZW1wbGF0ZT5cbiAgPEdyYW5kQ2hpbGQgLz5cbjwvdGVtcGxhdGU+IiwiR3JhbmRDaGlsZC52dWUiOiI8c2NyaXB0PlxuZXhwb3J0IGRlZmF1bHQge1xuICBpbmplY3Q6IFsnbWVzc2FnZSddXG59XG48L3NjcmlwdD5cblxuPHRlbXBsYXRlPlxuICA8cD5cbiAgICBNZXNzYWdlIHRvIGdyYW5kIGNoaWxkOiB7eyBtZXNzYWdlIH19XG4gIDwvcD5cbjwvdGVtcGxhdGU+In0=)
 
-### 注入的别名* {#injection-aliasing}
+### 注入的别名 {#injection-aliasing}
 
 当以数组形式使用 `inject`，注入的属性会以同名的 key 暴露到组件实例上。在上面的例子中，供给的属性名为 `"message"`，注入成了 `this.message`。访问属性的名字和注入名是相同的：<!--这里英文原文的 local 指代的就是访问 this.message 属性这一当前组件的局部状态，所以直接使用了 “访问属性的名字” 是为意译 -->
 
@@ -239,7 +239,7 @@ export default {
 
 <div class="composition-api">
 
-当使用响应式 `provide`/`inject` 值时，**建议尽可能将任何对反应式状态的变更都保持在 *provider* 内部**。 这样可以确保 `provide` 的状态和变更操作都在同一个组件内，使其更容易维护。
+当使用响应式 `provide`/`inject` 值时，**建议尽可能将任何对响应式状态的变更都保持在 *provider* 内部**。这样可以确保 `provide` 的状态和变更操作都在同一个组件内，使其更容易维护。
 
 有的时候，我们可能需要在 `injector` 组件中更改数据。在这种情况下，我们推荐在 `provider` 组件内提供一个更改数据方法：
 
@@ -383,3 +383,8 @@ export default {
 ```
 
 </div>
+  
+<small>
+__译者注__
+<a id="footnote-1"></a>[1] 在本章及后续章节中，“**提供**”将成为对应 Provide 的一个专有概念
+</small>

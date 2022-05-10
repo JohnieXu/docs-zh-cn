@@ -1,11 +1,11 @@
 # 条件渲染 {#conditional-rendering}
 
 <div class="options-api">
-  <VueSchoolLink href="https://vueschool.io/lessons/conditional-rendering-in-vue-3" title="Free Vue.js Conditional Rendering Lesson"/>
+  <VueSchoolLink href="https://vueschool.io/lessons/conditional-rendering-in-vue-3" title="免费的 Vue.js 条件渲染课程"/>
 </div>
 
 <div class="composition-api">
-  <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-conditionals-in-vue" title="Free Vue.js Conditional Rendering Lesson"/>
+  <VueSchoolLink href="https://vueschool.io/lessons/vue-fundamentals-capi-conditionals-in-vue" title="免费的 Vue.js 条件渲染课程"/>
 </div>
 
 <script setup>
@@ -74,7 +74,7 @@ const awesome = ref(true)
 
 ## `<template>` 上的 `v-if` {#v-if-on-template}
 
-因为 `v-if` 是一个指令，他必须依附于某个元素。但如果我们想要切换不只一个元素呢？在这种情况下我们可以在一个 `<template>` 元素上使用 `v-if`，这只是一个不可见的包装器元素，最后渲染的结果并不会包含这个 `<template>` 元素。
+因为 `v-if` 是一个指令，他必须依附于某个元素。但如果我们想要切换不止一个元素呢？在这种情况下我们可以在一个 `<template>` 元素上使用 `v-if`，这只是一个不可见的包装器元素，最后渲染的结果并不会包含这个 `<template>` 元素。
 
 ```vue-html
 <template v-if="ok">
@@ -94,7 +94,7 @@ const awesome = ref(true)
 <h1 v-show="ok">Hello!</h1>
 ```
 
-不同之处在于 `v-show` 会在 DOM 渲染中保留该元素；`v-show` 仅切换了该元素上名为 `display` 的CSS 属性。
+不同之处在于 `v-show` 会在 DOM 渲染中保留该元素；`v-show` 仅切换了该元素上名为 `display` 的 CSS 属性。
 
 `v-show` 不支持在 `<template>` 元素上使用，也没有 `v-else` 来配合。
 
@@ -104,7 +104,7 @@ const awesome = ref(true)
 
 `v-if` 也是**懒加载**的：如果在初次渲染时条件值为 false，则不会做任何事。条件区块会直到条件首次变为 true 时才渲染。
 
-相比之下，`v-show` 简单许多，元素无论初始条件如何，始终会被渲染，仅作 CSS 类的切换。
+相比之下，`v-show` 简单许多，元素无论初始条件如何，始终会被渲染，仅作 CSS class 的切换。
 
 总的来说，`v-if` 在首次渲染时的切换成本比 `v-show` 更高。因此当你需要非常频繁切换时 `v-show` 会更好，而运行时不常改变的时候 `v-if` 会更合适。
 

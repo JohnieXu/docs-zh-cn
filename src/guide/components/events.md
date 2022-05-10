@@ -27,7 +27,7 @@
 <MyComponent @some-event="callback" />
 ```
 
-同样，组件的事件监听器也支持`.once` 修饰符：
+同样，组件的事件监听器也支持 `.once` 修饰符：
 
 ```vue-html
 <MyComponent @some-event.once="callback" />
@@ -325,7 +325,7 @@ defineEmits(['update:modelValue'])
 
 </div>
 
-另一种在组件内实现 `v-model` 的方式是使用一个可写的 `computed` property ，给出 getter 和 setter。`get` 方法需返回 `modelValue` property 而 `set` 方法需触发相应的事件：
+另一种在组件内实现 `v-model` 的方式是使用一个可写的 `computed` property，给出 getter 和 setter。`get` 方法需返回 `modelValue` property 而 `set` 方法需触发相应的事件：
 
 <div class="options-api">
 
@@ -438,7 +438,7 @@ export default {
 
 ### 多个 `v-model` 绑定 {#multiple-v-model-bindings}
 
-通过我们刚才在 [`v-model` 参数]小节中学到的，利用一个特定的 prop 和一个特定事件，可以在一个组件上创建多个 `v-model` 双向绑定：
+通过我们刚才在 [`v-model` 参数](#v-model-arguments)小节中学到的，利用一个特定的 prop 和一个特定事件，可以在一个组件上创建多个 `v-model` 双向绑定：
 
 每一个 `v-model` 都会同步不同的 prop，而不需要在组件上写更多额外的选项：
 
